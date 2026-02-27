@@ -28,7 +28,22 @@ main {
   flex-direction: column;
   /* gap: 40px; */
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: center;
+}
+
+.title {
+    font-size: 40px;
+    margin: 0;
+} 
+
+.instructions {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    margin-bottom: 40px;
+    text-align: center;
+    color:#4A4E74;
+    padding: 20px
+;
 }
 
 .dice-container {
@@ -69,4 +84,5 @@ main {
   font-size: 1.2rem;
   font-family: Inter, sans-serif;
   cursor: pointer;
+  margin-top: 16px;
 }

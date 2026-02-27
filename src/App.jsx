@@ -30,25 +30,27 @@ export default function App() {
       hold={() => hold(dieObj.id)}
     />
   ));
-
+  
   function hold(id) {
-    console.log(id)
-  }
-
-  function toggle () {
-  
+    setDice(prevDice => prevDice.map(die => {
+      return die.id === id ? {...die, isHeld : !die.isHeld} : die
+    }))
   }
   
-  function handleClick() {
-    setDice(generateNewDice());
+  function rollDice(isHeld) {
+    setDice(prevDice => prevDice.map(die => {
+      return die.isHeld ? die : {...die, value: Math.ceil(Math.random() * 6)}
+    })) 
   }
 
   return (
     <>
       <main>
+        <h1 className="title">Tenzies</h1>
+        <p className="instructions">Roll until all dice are the same. Click each die to freeze it at its current value between rolls.</p>
         <div className="dice-container">{diceElements}</div>
 
-        <button className="roll-Btn" onClick={handleClick}>
+        <button className="roll-Btn" onClick={rollDice}>
           Roll
         </button>
       </main>
