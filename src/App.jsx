@@ -58,6 +58,9 @@ export default function App() {
 
   return (
     <>
+      {gameWon && (
+        <Confetti numberOfPieces={1000} gravity={0.1} recycle={false} />
+      )}
       <main>
         <h1 className="title">Tenzies</h1>
         <p className="instructions">
@@ -75,13 +78,6 @@ export default function App() {
           {gameWon ? "New Game" : "Roll"}
         </button>
 
-        {gameWon && (
-          <Confetti
-            numberOfPieces={1000}
-            gravity={0.1}
-            recycle={false}
-          />
-        )}
         <div aria-live="polite" className="sr-only">
           {gameWon && (
             <p>Congratulations! You won! Press "New Game" to start again.</p>
