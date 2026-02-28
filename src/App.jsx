@@ -42,7 +42,7 @@ export default function App() {
     );
   }
 
-  function rollDice(isHeld) {
+  function rollDice() {
     setDice((prevDice) =>
       prevDice.map((die) => {
         return die.isHeld
@@ -53,7 +53,7 @@ export default function App() {
   }
 
   function newGameRoll() {
-    setDice(() => generateNewDice());
+    setDice(generateNewDice());
   }
 
   return (
@@ -63,7 +63,7 @@ export default function App() {
         <p className="instructions">
           {gameWon
             ? "Hit New Game to restart."
-            : "Roll until all dice are the same. Click each die to freese it at its current value between rolls."}
+            : "Roll until all dice are the same. Click each die to freeze it at its current value between rolls."}
         </p>
         <div className="dice-container">{diceElements}</div>
 
