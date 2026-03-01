@@ -5,6 +5,8 @@ import Confetti from "react-confetti";
 
 export default function App() {
   const [dice, setDice] = useState(() => generateNewDice());
+  const [rolls, setRolls] = useState(0);
+
   const buttonRef = useRef(null);
 
   const gameWon =
@@ -50,17 +52,31 @@ export default function App() {
           : { ...die, value: Math.ceil(Math.random() * 6) };
       }),
     );
+    setRolls((prevRoll) => prevRoll + 1);
   }
 
   function newGameRoll() {
     setDice(generateNewDice());
+    setRolls(0);
+  }
+
+  function getRollMessage() {
+    if (gameWon) {
+      return rolls <= 5
+        ? `Damn!! You won using ${rolls} rolls only 🐐`
+        : `Took you ${rolls} rolls to win bastard 😒, you deserve less confetti!`;
+    }
+    return `Number of rolls : ${rolls}`;
   }
 
   return (
     <>
-      {gameWon && (
-        <Confetti numberOfPieces={1000} gravity={0.1} recycle={false} />
-      )}
+      {gameWon &&
+        (rolls <= 5 ? (
+          <Confetti numberOfPieces={1500} gravity={0.3} recycle={false} />
+        ) : (
+          <Confetti numberOfPieces={250} gravity={0.1} recycle={false} />
+        ))}
       <main>
         <h1 className="title">Tenzies</h1>
         <p className="instructions">
@@ -69,6 +85,8 @@ export default function App() {
             : "Roll until all dice are the same. Click each die to freeze it at its current value between rolls."}
         </p>
         <div className="dice-container">{diceElements}</div>
+
+        <p>{getRollMessage()}</p>
 
         <button
           ref={buttonRef}
